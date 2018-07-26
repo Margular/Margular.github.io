@@ -65,3 +65,32 @@ es-ES:
   <<: *DEFAULT_ES
 es-CL:
   <<: *DEFAULT_ES
+
+# English (default)
+# -----------------
+zh: &DEFAULT_ZH
+  skip_links: "跳过链接"
+  skip_primary_nav: "跳到主导航"
+  skip_content: "跳到内容"
+  skip_footer: "跳到页脚"
+  menu_label: "菜单"
+  by: "by"
+  min_read: "简读"
+  read_more: "阅读更多&hellip;"
+  categories: "类别"
+  tags: "标签"
+  pages_categorized: "提交的页面"
+  pages_tagged: "页面标记"
+  table_of_contents: "目录"
+  results_found: "找到的结果"
+  share: "分享"
+  tweet: "Tweet"
+  next: "下一个"
+  previous: "上一个"
+  newer: "新的"
+  older: "旧的"
+  back_to_top: "回到顶部"
+  search_placeholder_text: "输入搜索关键字..."
+  powered_by: "Powered by"
+zh-CN:
+  <<: *DEFAULT_ZH
