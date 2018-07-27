@@ -1,14 +1,8 @@
-# Sample site navigation bar links
-
-- title: Home
-  url: /
-- title: Posts
+- title: 文章
   url: /posts/
-- title: Categories
-  url: /categories/
-- title: Tags
+- title: 标签
   url: /tags/
-- title: Recipes
-  url: /recipes/
-- title: Search
+- title: 笔记
+  url: /notes/
+- title: 搜索
   url: /search/
