@@ -9,7 +9,7 @@ tags:
     - Linux
     - 壁纸
     - 教程
-last_modified_at: 2018-07-30T20:39:14+08:00
+last_modified_at: 2018-07-30T20:50:51+08:00
 ---
 
 ## 前言
@@ -38,7 +38,7 @@ last_modified_at: 2018-07-30T20:39:14+08:00
 
 * xwinwrap使用
 
-    直接上命令: ``mkfifo /tmp/wallpaper; xwinwrap -b -fs -sp -nf -ov -- mplayer -shuffle -slave -input file=/tmp/wallpaper -loop 0 -wid WID -nolirc `find ~/wallpapers -type f` &``
+    直接上命令: ``mkfifo /tmp/wallpaper; xwinwrap -fs -nf -ov -- mplayer -shuffle -slave -input file=/tmp/wallpaper -loop 0 -wid WID -nolirc `find ~/wallpapers -type f` &``
 
     命令解释:
     * `mkfifo /tmp/wallpaper`
@@ -54,7 +54,7 @@ last_modified_at: 2018-07-30T20:39:14+08:00
         * `-loop`: 循环次数, 0表示永久循环
         * `-wid`: 指定播放渲染的窗口ID, 前面的xwinwrap会创建window ID为`WID`的窗口, 所以这里指定为WID
         * `-nolirc`: 关闭红外线遥控
-        * ```find ~/wallpapers -type f` &``: 遍历家目录下的wallpapers目录以及子目录的文件, 设置所有找到的视频文件作为壁纸, 并且切换到后台运行
+        * `` `find ~/wallpapers -type f` &``: 遍历家目录下的wallpapers目录以及子目录的文件, 设置所有找到的视频文件作为壁纸, 并且切换到后台运行
 
     <br />最终效果就是搜索家目录下的`wallpapers`目录下的所有视频文件随机设置壁纸, 并且也是有声音的！
 
