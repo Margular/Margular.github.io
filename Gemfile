@@ -1,4 +1,4 @@
-source "https://rubygems.org"
+source "https://gems.ruby-china.com/"
 
 # use local theme gem for testing
 gem "jekyll-theme-so-simple"

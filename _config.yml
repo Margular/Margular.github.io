@@ -14,7 +14,6 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 theme: jekyll-theme-so-simple
-# remote_theme: mmistakes/so-simple-theme
 locale: zh-CN
 title: "哲学家的博客"
 description: "我即便是死了，被钉在棺材里了，我也要用这腐朽的声带大声地喊出: 5L2g5piv5LiA5LiqR2F55L2sISEh"
