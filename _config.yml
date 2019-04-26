@@ -52,9 +52,6 @@ paginate_path: /page:num/
 # Search
 search_full_content: true
 
-# Taxonomy pages
-tag_archive_path: "/tags/#"
-
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
 # to override the default setting.
