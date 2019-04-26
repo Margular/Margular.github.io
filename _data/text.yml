@@ -1,7 +1,7 @@
 # Theme text and labels
 
 
-# English (default)
+# English
 # -----------------
 en: &DEFAULT_EN
   skip_links: "Skip links"
@@ -98,7 +98,7 @@ es-ES:
 es-CL:
   <<: *DEFAULT_ES
 
-# English (default)
+# Chinese (default)
 # -----------------
 zh: &DEFAULT_ZH
   skip_links: "跳过链接"

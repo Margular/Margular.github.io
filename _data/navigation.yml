@@ -1,8 +1,8 @@
-- title: 主页
-  url: /
 - title: 文章
   url: /posts/
 - title: 标签
   url: /tags/
+- title: 分类
+  url: /categories/
 - title: 搜索
   url: /search/

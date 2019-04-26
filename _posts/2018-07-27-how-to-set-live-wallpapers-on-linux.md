@@ -1,4 +1,5 @@
 ---
+layout: post
 title: "论linux如何设置动态壁纸"
 image:
     path: /assets/images/live-wallpapers.gif
@@ -8,7 +9,8 @@ excerpt: "这篇文章将会教大家如何在linux设置动态壁纸"
 tags:
     - Linux
     - 壁纸
-    - 教程
+categories:
+    - 姿势
 last_modified_at: 2018-08-05T19:06:47+08:00
 ---
 
