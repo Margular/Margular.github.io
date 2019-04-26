@@ -98,7 +98,6 @@ es-ES:
 es-CL:
   <<: *DEFAULT_ES
 
-<<<<<<< HEAD
 # English (default)
 # -----------------
 zh: &DEFAULT_ZH
@@ -125,7 +124,6 @@ zh: &DEFAULT_ZH
   powered_by: "Powered by"
 zh-CN:
   <<: *DEFAULT_ZH
-=======
 
 # French
 # -----------------
@@ -186,4 +184,3 @@ it: &DEFAULT_IT
   powered_by: "Generato da"
 it-IT:
   <<: *DEFAULT_IT
->>>>>>> bdf320673a143ab50c011f0aa6c08636c9dbf4b9
