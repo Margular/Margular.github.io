@@ -200,7 +200,7 @@ $ grep 'Device Install.*USBSTOR' setupapi.dev.log -A 1
 
 ### HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Enum\USB
 
-这个键下面的内容也可能会随着插拔USB而更新，而且经测试Win7在第二次插入USB的时候仅有此键会记录插入时间！在该例中对应的键为：
+这个键下面的内容也可能会随着插拔USB而更新，而且经测试Win7在某些情况插入USB的时候仅有此键会记录插入时间！在该例中对应的键为：
 
 `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Enum\USB\VID_090C&PID_1000\AA00000000011178`
 
@@ -208,7 +208,10 @@ $ grep 'Device Install.*USBSTOR' setupapi.dev.log -A 1
 
 ### 监控注册表验证
 
-利用[Sysinternals](https://docs.microsoft.com/en-us/sysinternals/downloads/sysinternals-suite)套件自带的[Process Monitor](https://docs.microsoft.com/en-us/sysinternals/downloads/procmon)对注册表事件进行监控，并利用[USBDeview](https://www.nirsoft.net/utils/usb_devices_view.html)对USB插拔事件监控得出以下结论：插入和拔出USB都可能刷新注册表项的时间，因此可以根据时间推断最后一次插拔的时间
+利用[Sysinternals](https://docs.microsoft.com/en-us/sysinternals/downloads/sysinternals-suite)套件自带的[Process Monitor](https://docs.microsoft.com/en-us/sysinternals/downloads/procmon)对注册表事件进行监控，并利用[USBDeview](https://www.nirsoft.net/utils/usb_devices_view.html)对USB插拔事件监控，再结合命令行搜索时间字符串(`reg save HKLM\SYSTEM SYSTEM.reg /y && reglookup.exe SYSTEM.reg 2>ERROR | findstr 14:43:14 2>ERROR2`)，得出以下结论：
+
+* 经验证，在Win7/Win10上仅插入USB会刷新注册表项的时间，因此可以根据时间推断最后一次插入USB的时间但是无法知道USB拔出的时间
+* 电脑重启后时间戳会恢复到第一次插入USB的时刻
 
 附上用来验证用的ProcMon.exe的配置文件，可以导入自行验证：
 
