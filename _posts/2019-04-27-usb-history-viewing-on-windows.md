@@ -7,7 +7,7 @@ tags:
     - USB
 categories:
     - 取证分析
-last_modified_at: 2019-04-27T16:34:51+08:00
+last_modified_at: 2019-04-27T21:59:38+08:00
 ---
 
 ## Setup API Logs
@@ -91,7 +91,7 @@ $ grep 'Device Install.*USBSTOR' setupapi.dev.log -A 1
 
 但是Windows自带的注册表看不见时间记录信息，需要借助三方工具
 
-* Windows在线分析的时候可以使用工具[RegistryExplorer](https://f001.backblazeb2.com/file/EricZimmermanTools/RegistryExplorer_RECmd.zip)，这个工具可能会出现字体太小的问题，如图方式可以解决：
+* Windows在线分析的时候可以使用工具[RegistryExplorer](https://f001.backblazeb2.com/file/EricZimmermanTools/RegistryExplorer_RECmd.zip)(在Win7上使用该工具需要安装.NET框架)，这个工具可能会出现字体太小的问题，如图方式可以解决：
 
   ![registry-explorer](/assets/images/registry-explorer.png)
 
@@ -144,7 +144,7 @@ $ grep 'Device Install.*USBSTOR' setupapi.dev.log -A 1
 
 `_??_USBSTOR#Disk&Ven_SMI&Prod_USB_DISK&Rev_1100#AA00000000011178&0#{53f56307-b6bf-11d0-94f2-00a0c91efb8b}`
 
-可以看到和上面setupapi.dev.log看到的数据完全一致，代表这个USB就是setupapi里面记录的USB，并且MountedDevices记录的最后修改时间也是：2019/04/20 21:46:52。~~这说明系统最后插入的USB就是此设备~~(Win10上验证并不会记录)
+可以看到和上面setupapi.dev.log看到的数据完全一致，代表这个USB就是setupapi里面记录的USB，并且MountedDevices记录的最后修改时间也是：2019/04/20 21:46:52。这说明系统最后插入的USB就是此设备
 
 
 
@@ -166,7 +166,7 @@ $ grep 'Device Install.*USBSTOR' setupapi.dev.log -A 1
 /ControlSet001/Control/DeviceClasses/{53f56307-b6bf-11d0-94f2-00a0c91efb8b}/##?#USBSTOR#Disk&Ven_SMI&Prod_USB_DISK&Rev_1100#AA00000000011178&0#{53f56307-b6bf-11d0-94f2-00a0c91efb8b}/#,KEY,,2019-04-20 13:46:52
 ```
 
-~~这里的时间戳表示的是在Windows最后一次启动过程中首次连接USB的时间是：21:46:52~~(Win10上测试并不会记录)
+这里的时间戳表示的是在Windows最后一次启动过程中首次连接USB的时间是：21:46:52
 
 再查看另外一个键：
 
@@ -198,15 +198,17 @@ $ grep 'Device Install.*USBSTOR' setupapi.dev.log -A 1
 
 
 
+### HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Enum\USB
+
+这个键下面的内容也可能会随着插拔USB而更新，而且经测试Win7在第二次插入USB的时候仅有此键会记录插入时间！在该例中对应的键为：
+
+`HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Enum\USB\VID_090C&PID_1000\AA00000000011178`
+
+
+
 ### 监控注册表验证
 
-利用Sysinternals套件自带的Process Monitor对注册表事件进行监控，得出以下结论：
-
-**无论对USB进行怎样的操作(插拔、删除文件、创建文件等)，以上提到的注册表的键只有以下部分会被记录修改时间**：
-
-`HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Enum\USBSTOR\Disk&Ven_SMI&Prod_USB_DISK&Rev_1100\AA00000000011178&0\Properties`
-
-在这个键下的{83da6326-97a6-4088-9453-a1923f573b29}的0066和0067的修改时间会被记录，除此之外的键修改时间不会被记录(Windows 10上测试)
+利用[Sysinternals](https://docs.microsoft.com/en-us/sysinternals/downloads/sysinternals-suite)套件自带的[Process Monitor](https://docs.microsoft.com/en-us/sysinternals/downloads/procmon)对注册表事件进行监控，并利用[USBDeview](https://www.nirsoft.net/utils/usb_devices_view.html)对USB插拔事件监控得出以下结论：插入和拔出USB都可能刷新注册表项的时间，因此可以根据时间推断最后一次插拔的时间
 
 附上用来验证用的ProcMon.exe的配置文件，可以导入自行验证：
 
