@@ -7,7 +7,7 @@ tags:
     - USB
 categories:
     - 取证分析
-last_modified_at: 2019-04-27T13:10:51+08:00
+last_modified_at: 2019-04-27T16:34:51+08:00
 ---
 
 ## Setup API Logs
@@ -73,15 +73,31 @@ $ grep 'Device Install.*USBSTOR' setupapi.dev.log -A 1
 
 ## 注册表
 
+### Fred自动生成报告
+
+注册表里面的信息可以使用[Fred](https://www.pinguin.lu/fred)自动生成报告，简单方便，用Fred打开注册表后Reports -> Generate Report就能生成报告，并且还会附带其它一些有用的信息(图中展示的只是一部分，还有很多信息)：
+
+![fred-report](/assets/images/fred-report.png)
+
+但是有的时候我们可能不能不手工分析，比如注册表文件损坏，只能看到一部分的时候，就只能自己手工分析(比如我碰到过Fred解析不了但是可以用RegRipper解析的情况)
+
+
+
 ### HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Enum\USBSTOR\
 
 这个键也保存的有USB设备的信息，如下图所示：
 
 ![usb-history-viewing](/assets/images/usb-history-viewing.png)
 
-但是Windows自带的注册表看不见时间记录信息，需要借助三方工具，推荐fred：<https://www.pinguin.lu/fred>
+但是Windows自带的注册表看不见时间记录信息，需要借助三方工具
 
-根据维基百科参考资料显示，我们需要用fred(Windows版本太老，亦无法显示时间，这里使用Linux版本作演示)打开`C:\Windows\System32\config\SYSTEM`
+* Windows在线分析的时候可以使用工具[RegistryExplorer](https://f001.backblazeb2.com/file/EricZimmermanTools/RegistryExplorer_RECmd.zip)，这个工具可能会出现字体太小的问题，如图方式可以解决：
+
+  ![registry-explorer](/assets/images/registry-explorer.png)
+
+* fred：<https://www.pinguin.lu/fred>
+
+以下演示都用fred：根据维基百科参考资料显示，我们需要用fred(Windows版本太老，亦无法显示时间，这里使用Linux版本作演示)打开`C:\Windows\System32\config\SYSTEM`
 
 > Windows NT systems store the registry in a binary file format which can be exported, loaded and unloaded by the Registry Editor in these operating systems. The following system registry files are stored in `%SystemRoot%\System32\Config\`:
 >
