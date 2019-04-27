@@ -211,7 +211,10 @@ $ grep 'Device Install.*USBSTOR' setupapi.dev.log -A 1
 利用[Sysinternals](https://docs.microsoft.com/en-us/sysinternals/downloads/sysinternals-suite)套件自带的[Process Monitor](https://docs.microsoft.com/en-us/sysinternals/downloads/procmon)对注册表事件进行监控，并利用[USBDeview](https://www.nirsoft.net/utils/usb_devices_view.html)对USB插拔事件监控，再结合命令行搜索时间字符串(`reg save HKLM\SYSTEM SYSTEM.reg /y && reglookup.exe SYSTEM.reg 2>ERROR | findstr 14:43:14 2>ERROR2`)，得出以下结论：
 
 * 经验证，在Win7/Win10上仅插入USB会刷新注册表项的时间，因此可以根据时间推断最后一次插入USB的时间但是无法知道USB拔出的时间
-* 电脑重启后时间戳会恢复到第一次插入USB的时刻
+
+* 电脑重启后时间戳可能会变成重启时刻的时间戳，验证了USBDeview官方的一句话：
+
+  > **Notice:** According to user reports, On some systems the 'Last Plug/Unplug Date' and the 'Created Date' values are initialized after reboot. This means that these columns may display the reboot time instead of the correct date/time.
 
 附上用来验证用的ProcMon.exe的配置文件，可以导入自行验证：
 
